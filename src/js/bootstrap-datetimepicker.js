@@ -1326,7 +1326,8 @@
 
             change = function (e) {
                 var val = $(e.target).val().trim(),
-                    parsedDate = val ? parseInputDate(val) : null;
+                    preParsedDate = options.preParser ? options.prePraser(val) : val,
+                    parsedDate = preParsedDate ? parseInputDate(preParsedDate) : null;
                 setValue(parsedDate);
                 e.stopImmediatePropagation();
                 return false;
@@ -2629,7 +2630,8 @@
         disabledTimeIntervals: false,
         disabledHours: false,
         enabledHours: false,
-        viewDate: false
+        viewDate: false,
+        preParser: false
     };
 
     return $.fn.datetimepicker;
