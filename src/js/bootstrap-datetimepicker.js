@@ -1326,7 +1326,7 @@
 
             change = function (e) {
                 var val = $(e.target).val().trim(),
-                    preParsedDate = options.preParser ? options.prePraser(val) : val,
+                    preParsedDate = options.preParser(val),
                     parsedDate = preParsedDate ? parseInputDate(preParsedDate) : null;
                 setValue(parsedDate);
                 e.stopImmediatePropagation();
@@ -2328,6 +2328,10 @@
             return picker;
         };
 
+        picker.preParser = function (date) {
+            return date;
+        };
+
         // initializing element and component attributes
         if (element.is('input')) {
             input = element;
@@ -2631,7 +2635,9 @@
         disabledHours: false,
         enabledHours: false,
         viewDate: false,
-        preParser: false
+        preParser: function (date) {
+            return date;
+        }
     };
 
     return $.fn.datetimepicker;
